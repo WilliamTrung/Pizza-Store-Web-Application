@@ -1,0 +1,23 @@
+﻿using ApplicationCore.Repository;
+using BusinessService.Paging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessService.IService
+{
+    public interface IBaseService<TEntity, TDto>
+    where TEntity : class
+    where TDto : class
+    {
+        public Task<bool> Create(TDto dto);
+        public Task<bool> Update(TDto dto);
+        public Task<bool> Delete(TDto dto);
+        public Task<IEnumerable<TDto>> GetDTOs(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null, PagingRequest? paging = null);
+
+        public TEntity DisableSelfReference(TEntity entity);
+    }
+}

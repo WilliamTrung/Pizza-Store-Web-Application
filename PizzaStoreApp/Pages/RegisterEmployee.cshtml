@@ -1,0 +1,35 @@
+﻿@page
+@model PizzaStoreApp.Pages.RegisterEmployeeModel
+@{
+
+}
+<div class="text-center">
+    <h1 class="display-4">Login</h1>
+</div>
+@{
+    var message = Model.ErrorMessage;
+    if (message != null)
+    {
+        <h3>@Model.ErrorMessage</h3>
+    }
+}
+<form class="col-6" method="post">
+    <div class="m-2 p-3">
+        <label asp-for="@Model.Account.UserName">Username</label>
+    <input class="form-control" type="text" asp-for="@Model.Account.UserName"/>
+    <span asp-validation-for="@Model.Account.UserName"></span>
+    </div>
+    <div class="m-2 p-3">
+        <label asp-for="@Model.Account.Password">Password</label>
+    <input class="form-control" type="password" asp-for="@Model.Account.Password"/>
+    <span asp-validation-for="@Model.Account.Password"></span>
+    </div>
+    <div class="m-2 p-3">
+        <label asp-for="@Model.Account.FullName">Fullname</label>
+    <input class="form-control" type="text" asp-for="@Model.Account.FullName"/>
+    <span asp-validation-for="@Model.Account.FullName"></span>
+    </div>
+    <div class="m-2 p-3">
+        <button>Register</button>
+    </div>
+</form>
