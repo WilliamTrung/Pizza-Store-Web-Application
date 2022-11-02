@@ -14,5 +14,14 @@ namespace BusinessService.Service
         public CategoryService(PizzaStoreContext context, IMapper mapper) : base(context, mapper)
         {
         }
+        public override void DisableSelfReference(ref Category entity)
+        {
+            if(entity.Products != null)
+            {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+                entity.Products = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+            }
+        }
     }
 }

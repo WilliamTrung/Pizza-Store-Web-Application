@@ -15,5 +15,15 @@ namespace BusinessService.Service
         {
 
         }
+        public override void DisableSelfReference(ref Product entity)
+        {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+            if (entity.Supplier != null)
+            {
+                entity.Supplier.Products = null;
+            }
+            entity.OrderDetails = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+        }
     }
 }
