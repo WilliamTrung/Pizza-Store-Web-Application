@@ -60,10 +60,9 @@ namespace BusinessService.Service
             }
         }
 
-        public virtual TEntity DisableSelfReference(TEntity entity)
+        public virtual void DisableSelfReference(ref TEntity entity)
         {
             //throw new NotImplementedException();
-            return entity;
         }
 
         public async Task<bool> Update(TDto dto)
@@ -103,7 +102,7 @@ namespace BusinessService.Service
             for (int i = 0; i < list_entities_raw.Count(); i++)
             {
                 var entity = list_entities_raw.ElementAt(i);
-                entity = DisableSelfReference(entity);
+                DisableSelfReference(ref entity);
                 list_entities.Add(entity);
             }
             if (list_entities != null && list_entities.Count() > 0)

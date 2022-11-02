@@ -11,8 +11,21 @@ namespace BusinessService.Service
 {
     public class OrderDetailService : BaseService<OrderDetail, DTOs.OrderDetail>, IOrderDetailService
     {
+        private IProductService _productService;
         public OrderDetailService(PizzaStoreContext context, IMapper mapper) : base(context, mapper)
         {
+            _productService = new ProductService(context, mapper);
+        }
+        public override void DisableSelfReference(ref OrderDetail entity)
+        {
+            if(entity.Order != null)
+                entity.Order.OrderDetails = null;
+            if(entity.Product != null)
+            {
+                var product = entity.Product;
+                _productService.DisableSelfReference(ref product);
+                entity.Product = product;
+            }
         }
     }
 }

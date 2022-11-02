@@ -18,6 +18,6 @@ namespace BusinessService.IService
         public Task<bool> Delete(TDto dto);
         public Task<IEnumerable<TDto>> GetDTOs(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null, PagingRequest? paging = null);
 
-        public TEntity DisableSelfReference(TEntity entity);
+        public void DisableSelfReference(ref TEntity entity);
     }
 }
