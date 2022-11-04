@@ -23,6 +23,9 @@ namespace BusinessService.Service
             if(entity.Product != null)
             {
                 var product = entity.Product;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+                product.OrderDetails = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
                 _productService.DisableSelfReference(ref product);
                 entity.Product = product;
             }

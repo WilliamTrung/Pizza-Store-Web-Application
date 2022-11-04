@@ -24,6 +24,7 @@ namespace BusinessService.Service
                 for(int i = 0; i < entity.Products.Count; i++)
                 {
                     var product = entity.Products.ElementAt(i);
+                    product.Supplier = null;
                     _productService.DisableSelfReference(ref product);
                     products.Add(product);
                 }

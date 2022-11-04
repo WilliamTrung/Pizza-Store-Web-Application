@@ -40,8 +40,8 @@
                 <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.UnitPrice" class="control-label"></label>
-                 <img src="" alt="@Url.Content(Product.ProductImage)"/>
+                <label asp-for="Product.UnitPrice" class="c ontrol-label"></label>
+                 <img src="~/@(Model.Product.ProductImage)" alt="~/@(Model.Product.ProductImage)"/>
                 <label asp-for="FileUpload" class="control-label"></label>
                 <input type="file" asp-for="FileUpload" class="form-control"/>
                 <span asp-validation-for="FileUpload" class="text-danger"></span>
