@@ -11,16 +11,24 @@ namespace BusinessService.Service
 {
     public class CategoryService : BaseService<Category, DTOs.Category>, ICategoryService
     {
+        private IProductService _productService;
         public CategoryService(PizzaStoreContext context, IMapper mapper) : base(context, mapper)
         {
+            _productService = new ProductService(context, mapper);
         }
         public override void DisableSelfReference(ref Category entity)
         {
-            if(entity.Products != null)
+            if (entity.Products != null)
             {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-                entity.Products = null;
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+                var products = new List<Product>();
+                for (int i = 0; i < entity.Products.Count; i++)
+                {
+                    var product = entity.Products.ElementAt(i);
+                    product.Category = null;
+                    _productService.DisableSelfReference(ref product);
+                    products.Add(product);
+                }
+                entity.Products = products;
             }
         }
     }

@@ -13,7 +13,6 @@ namespace BusinessService.Service
     {
         public ProductService(PizzaStoreContext context, IMapper mapper) : base(context, mapper)
         {
-
         }
         public override void DisableSelfReference(ref Product entity)
         {
@@ -21,6 +20,10 @@ namespace BusinessService.Service
             if (entity.Supplier != null)
             {
                 entity.Supplier.Products = null;
+            }
+            if(entity.Category != null)
+            {
+                entity.Category.Products = null;
             }
             entity.OrderDetails = null;
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
