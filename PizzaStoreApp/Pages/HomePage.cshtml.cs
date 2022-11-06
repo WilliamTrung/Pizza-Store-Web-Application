@@ -31,7 +31,6 @@ namespace PizzaStoreApp.Pages
                     var products = await productService.GetDTOs(includeProperties: "Category,Supplier");
                     Products = (IList<Product>)products.ToList();
                     Products = Products.ToList();
-                    /*       Products = Products.OrderBy(d => d.ProductId).Take(6).ToList();*/
 
                     var categories = await categoryService.GetDTOs();
                     Categories = (IList<Category>)categories.ToList();
