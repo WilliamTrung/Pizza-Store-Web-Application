@@ -16,10 +16,11 @@ namespace PizzaStoreApp.Pages
         }
         public IActionResult OnGet()
         {
-            if(SessionExtension.GetLoginUser(HttpContext.Session) == null)
+            if (SessionExtension.GetLoginUser(HttpContext.Session) == null)
             {
                 return RedirectToPage("LoginEmployee");
-            } else
+            }
+            else
             {
                 return RedirectToPage("Management/Products/Index");
             }

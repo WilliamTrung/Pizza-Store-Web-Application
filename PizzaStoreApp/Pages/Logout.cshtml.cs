@@ -5,8 +5,10 @@ namespace PizzaStoreApp.Pages
 {
     public class LogoutModel : PageModel
     {
-        public void OnGet()
+        public RedirectToPageResult OnGet()
         {
+            HttpContext.Session.Clear();
+            return RedirectToPage("/LoginEmployee");
         }
     }
 }

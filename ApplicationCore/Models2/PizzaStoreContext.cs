@@ -29,7 +29,7 @@ namespace ApplicationCore.Models2
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=WILLIAMTRUNG\\MYSQL;Database=PizzaStore;User ID=sa;Password=123;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("server=MSI;Database=PizzaStore;User ID=sa;Password=123456789;Trusted_Connection=True;");
             }
         }
 
