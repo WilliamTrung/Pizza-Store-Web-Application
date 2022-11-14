@@ -35,20 +35,6 @@ namespace ApplicationCore.Models2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>(entity =>
-            {
-                entity.ToTable("Account");
-
-                entity.Property(e => e.AccountId).HasColumnName("AccountID");
-
-                entity.Property(e => e.FullName).HasMaxLength(50);
-
-                entity.Property(e => e.Password)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserName).HasMaxLength(50);
-            });
 
             modelBuilder.Entity<Category>(entity =>
             {

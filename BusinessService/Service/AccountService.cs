@@ -19,7 +19,7 @@ namespace BusinessService.Service
         public async Task<DTOs.Account?> Login(DTOs.Account account)
         {
             //throw new NotImplementedException();
-            var find = await GetDTOs(filter: a => a.UserName == account.UserName && a.Password == account.Password);
+            var find = await GetDTOs(filter: a => a.Username == account.Username && a.Password == account.Password);
             var found = find.FirstOrDefault();
             if(found != null)
             {
@@ -31,7 +31,7 @@ namespace BusinessService.Service
         public async Task<DTOs.Account?> Register(DTOs.Account account)
         {
             //throw new NotImplementedException();
-            var find = await GetDTOs(filter: a => a.UserName == account.UserName && a.Password == account.Password);
+            var find = await GetDTOs(filter: a => a.Username == account.Username && a.Password == account.Password);
             var found = find.FirstOrDefault();
             if (found == null)
             {
