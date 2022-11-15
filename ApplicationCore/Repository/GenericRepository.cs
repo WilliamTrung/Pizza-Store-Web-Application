@@ -16,13 +16,14 @@ namespace ApplicationCore.Repository
         {
             _context = context;
         }
-        public Task<bool> Create(TEntity entity)
+        public async Task<TEntity> Create(TEntity entity)
         {
             try
             {
                 if (entity == null) throw new ArgumentNullException("entity");
                 _context.Add(entity);
-                return Task.FromResult(true);
+                await _context.SaveChangesAsync();
+                return entity; 
             }
             catch (Exception)
             {
@@ -62,20 +63,16 @@ namespace ApplicationCore.Repository
             return Task.FromResult(query.AsEnumerable());
         }
 
-        public Task<int> SaveChangesAsync()
-        {
-            //throw new NotImplementedException();
-            return _context.SaveChangesAsync();
-        }
 
-        public Task<bool> Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
             try
             {
                 if (entity == null) throw new ArgumentNullException("entity");
 #pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
                 _context.Entry<TEntity>(entity).CurrentValues.SetValues(entity);
-                return Task.FromResult(true);
+                await _context.SaveChangesAsync();
+                return entity;
             }
             catch (Exception)
             {

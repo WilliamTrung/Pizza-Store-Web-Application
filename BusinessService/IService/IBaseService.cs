@@ -13,8 +13,8 @@ namespace BusinessService.IService
     where TEntity : class
     where TDto : class
     {
-        public Task<bool> Create(TDto dto);
-        public Task<bool> Update(TDto dto);
+        public Task<TDto> Create(TDto dto);
+        public Task<TDto> Update(TDto dto);
         public Task<bool> Delete(TDto dto);
         public Task<IEnumerable<TDto>> GetDTOs(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null, PagingRequest? paging = null);
 

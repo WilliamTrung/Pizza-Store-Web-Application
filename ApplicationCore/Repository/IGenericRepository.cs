@@ -10,14 +10,12 @@ namespace ApplicationCore.Repository
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         //C
-        public Task<bool> Create(TEntity entity);
+        public Task<TEntity> Create(TEntity entity);
         //R
         public Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null);
         //U
-        public Task<bool> Update(TEntity entity);
+        public Task<TEntity> Update(TEntity entity);
         //D
         public Task<bool> Delete(TEntity entity);
-
-        public Task<int> SaveChangesAsync();
     }
 }

@@ -26,15 +26,14 @@ namespace BusinessService.Service
             _mapper = mapper;
             _repository = new GenericRepository<TEntity>(_context);
         }
-        public virtual async Task<bool> Create(TDto dto)
+        public virtual async Task<TDto> Create(TDto dto)
         {
             if (dto != null)
             {
                 var entity = _mapper.Map<TEntity>(dto);
                 try
                 {
-                    await _repository.Create(entity);
-                    await _repository.SaveChangesAsync();
+                    entity = await _repository.Create(entity);
                     dto = _mapper.Map<TDto>(entity);
                 }
                 catch
@@ -42,7 +41,7 @@ namespace BusinessService.Service
                     dto = null;
                 }
             }
-            return dto != null ? true: false ;
+            return dto;
         }
 
         public async Task<bool> Delete(TDto dto)
@@ -51,7 +50,7 @@ namespace BusinessService.Service
             if (entity != null)
             {
                 if(await _repository.Delete(entity))
-                    return await _repository.SaveChangesAsync() > 0;
+                    return true;
                 return false;
             }
             else
@@ -65,16 +64,16 @@ namespace BusinessService.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<bool> Update(TDto dto)
+        public async Task<TDto> Update(TDto dto)
         {
             if (dto != null)
             {
                 var entity = _mapper.Map<TEntity>(dto);
                 try
                 {
-                    if(await _repository.Update(entity))
+                    entity = await _repository.Update(entity);
+                    if(entity != null)
                     {
-                        await _repository.SaveChangesAsync();
                         dto = _mapper.Map<TDto>(entity);
                     } else
                     {
@@ -88,7 +87,7 @@ namespace BusinessService.Service
                 }
 
             }
-            return dto == null?false:true;
+            return dto;
         }
 
         public async Task<IEnumerable<TDto>> GetDTOs(Expression<Func<TEntity, bool>>? filter = null, string? includeProperties = null, PagingRequest? paging = null)
