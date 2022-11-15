@@ -15,7 +15,6 @@ namespace BusinessService
         {
             CreateMap<Category, DTOs.Category>().ReverseMap();
             CreateMap<Account, DTOs.Account>().ReverseMap();
-            CreateMap<Customer, DTOs.Customer>().ReverseMap();
             CreateMap<Order, DTOs.Order>().ReverseMap();
             CreateMap<OrderDetail, DTOs.OrderDetail>().ReverseMap();
             CreateMap<Product, DTOs.Product>().ReverseMap();

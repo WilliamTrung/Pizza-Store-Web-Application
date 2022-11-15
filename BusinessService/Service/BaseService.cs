@@ -26,7 +26,7 @@ namespace BusinessService.Service
             _mapper = mapper;
             _repository = new GenericRepository<TEntity>(_context);
         }
-        public async Task<bool> Create(TDto dto)
+        public virtual async Task<bool> Create(TDto dto)
         {
             if (dto != null)
             {
