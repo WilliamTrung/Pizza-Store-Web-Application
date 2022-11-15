@@ -1,4 +1,5 @@
 ﻿
+using BusinessService;
 using BusinessService.DTOs;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -11,7 +12,8 @@ namespace PizzaStoreApp.Helper
     {
         public static void Set<T>(this ISession session, string key, T? value)
         {
-            session.SetString(key, JsonSerializer.Serialize(value));
+            string json = JsonSerializer.Serialize(value);
+            session.SetString(key, json);
         }
 
         public static T? Get<T>(this ISession session, string key)
@@ -41,6 +43,18 @@ namespace PizzaStoreApp.Helper
         {
             Set<Account>(session, "login-user", null);
             return true;
+        }
+        public static Cart? GetCart(this ISession session)
+        {
+            var value = session.GetString("cart");
+            if (value != null)
+            {
+                return JsonSerializer.Deserialize<Cart>(value);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
+using BusinessService;
 using BusinessService.DTOs;
 using BusinessService.IService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NuGet.Protocol.Plugins;
 using PizzaStoreApp.Helper;
 
 namespace PizzaStoreApp.Pages
@@ -24,26 +26,35 @@ namespace PizzaStoreApp.Pages
         {
 
         }
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
                 if (Account != null)
                 {
-                    var register = _accountService.Register(Account);
+                    var register = await _accountService.Register(Account);
                     if (register != null)
                     {
                         var session = HttpContext.Session;
                         SessionExtension.Set(session, "login-user", register);
                         ErrorMessage = null;
-                        ViewComponent("Index");
+                        Cart cart = new Cart();
+                        cart.Account = register;
+                        SessionExtension.Set(session, "cart", cart);
+                        return RedirectToPage("/Customer/HomePage");
+                    } else
+                    {
+                        ErrorMessage = "Registered failed!";
+                        return Page();
                     }
                 }
+                
             }
             else
             {
                 ErrorMessage = "Register's data is not valid!";
             }
+            return Page();
         }
     }
 }

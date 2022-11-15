@@ -64,14 +64,14 @@ namespace BusinessService.Service
             //throw new NotImplementedException();
         }
 
-        public async Task<TDto> Update(TDto dto)
+        public async Task<TDto> Update(Expression<Func<TEntity, bool>> filter, TDto dto)
         {
             if (dto != null)
             {
                 var entity = _mapper.Map<TEntity>(dto);
                 try
                 {
-                    entity = await _repository.Update(entity);
+                    entity = await _repository.Update(filter, entity);
                     if(entity != null)
                     {
                         dto = _mapper.Map<TDto>(entity);

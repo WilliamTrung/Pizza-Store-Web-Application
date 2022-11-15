@@ -64,15 +64,21 @@ namespace ApplicationCore.Repository
         }
 
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<TEntity> Update(Expression<Func<TEntity, bool>> filter, TEntity entity)
         {
             try
             {
                 if (entity == null) throw new ArgumentNullException("entity");
 #pragma warning disable CS8073 // The result of the expression is always the same since a value of this type is never equal to 'null'
-                _context.Entry<TEntity>(entity).CurrentValues.SetValues(entity);
-                await _context.SaveChangesAsync();
-                return entity;
+                var find = await Get(filter);
+                var found = find.First();
+                if(found != null)
+                {
+                    _context.Entry<TEntity>(found).CurrentValues.SetValues(entity);
+                    await _context.SaveChangesAsync();
+                    return found;
+                }
+                return null;
             }
             catch (Exception)
             {

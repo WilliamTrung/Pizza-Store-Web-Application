@@ -1,3 +1,4 @@
+using BusinessService;
 using BusinessService.DTOs;
 using BusinessService.IService;
 using Microsoft.AspNetCore.Mvc;
@@ -23,17 +24,25 @@ namespace PizzaStoreApp.Pages
         {
             Account = new Account();
         }
-        public IActionResult? OnPost()
+        public async Task<IActionResult?> OnPostAsync()
         {
             if (Account != null)
             {
-                var login = _accountService.Login(Account);
+                var login = await _accountService.Login(Account);
                 if (login != null)
                 {
                     var session = HttpContext.Session;
-                    SessionExtension.Set(session, "login-user", login.Result);
+                    SessionExtension.Set(session, "login-user", login);
                     ErrorMessage = null;
-                    return RedirectToPage("Index");
+                    if(login.Type == 0)
+                    {
+                        //admin
+                        return RedirectToPage("Management/Products/Index");
+                    }
+                    Cart cart = new Cart();
+                    cart.Account = login;
+                    SessionExtension.Set(session, "cart", cart);
+                    return RedirectToPage("Customer/HomePage");
                 }
             }
             ErrorMessage = "Wrong username or password";

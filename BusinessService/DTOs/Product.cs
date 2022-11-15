@@ -21,9 +21,11 @@ namespace BusinessService.DTOs
         public int? CategoryId { get; set; }
         [Required(ErrorMessage = "Quantity must not be empty!")]
         [Range(1, Int32.MaxValue, ErrorMessage = "Quantity must be greater than 0!")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int QuantityPerUnit { get; set; }
         [Required(ErrorMessage = "Price must not be empty!")]
         [Range(1, Int32.MaxValue, ErrorMessage = "Price must be greater than 0!")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal UnitPrice { get; set; }
         public string? ProductImage { get; set; }
 

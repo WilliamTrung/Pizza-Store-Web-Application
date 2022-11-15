@@ -14,7 +14,7 @@ namespace BusinessService.IService
     where TDto : class
     {
         public Task<TDto> Create(TDto dto);
-        public Task<TDto> Update(TDto dto);
+        public Task<TDto> Update(Expression<Func<TEntity, bool>> filter, TDto dto);
         public Task<bool> Delete(TDto dto);
         public Task<IEnumerable<TDto>> GetDTOs(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null, PagingRequest? paging = null);
 

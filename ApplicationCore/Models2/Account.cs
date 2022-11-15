@@ -21,8 +21,7 @@ namespace ApplicationCore.Models2
         public string Password { get; set; } = null!;
         [Required]
         public string Address { get; set; } = null!;
-        [Required]
-        [StringLength(10, ErrorMessage = "Length must be equal to 10!")]
+        
         public string Phone { get; set; } = null!;
 
         public virtual ICollection<Order> Orders { get; set; }

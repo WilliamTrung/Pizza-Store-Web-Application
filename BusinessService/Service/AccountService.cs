@@ -36,10 +36,11 @@ namespace BusinessService.Service
             if (found == null)
             {
                 //set type to customer
-                account.Type = 0;
-                if(await Create(account))
+                account.Type = 1;
+                var entity = await Create(account);
+                if(entity != null)
                 {
-                    return account;
+                    return _mapper.Map<DTOs.Account>(entity);
                 }
             }
             return null;

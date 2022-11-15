@@ -64,9 +64,8 @@
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
                     
-                @if(login.Type == 1 ){
+                @if(login.Type == 0 ){
                             <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
                 }
             </td>

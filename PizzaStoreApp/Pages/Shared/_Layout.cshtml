@@ -37,7 +37,7 @@
                         </ul>
                     </div>
                 }
-                @if(login != null && @login.Type == 1){
+                @if(login != null && @login.Type == 0){
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
@@ -52,7 +52,7 @@
                         </ul>
                     </div>
                 }
-                @if (login != null && @login.Type == 2)
+                @if (login != null && @login.Type != 0)
                 {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
@@ -60,8 +60,11 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Management/Products/Index">Pizza</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Customer/HomePage">Pizza</a>
                             </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Customer/Cart">Cart</a>
+                                </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Order">Order</a>
                             </li>
@@ -77,7 +80,7 @@
                 }
                 else
                 {
-                    <label class="col-7"></label>
+                    <label class="col-5"></label>
                     <label class="col-2 text-dark">Welcome @login.Username</label>
                     <a class="nav-item col-2 nav-link text-dark text-center" asp-area="" asp-page="/Logout">Log out</a>
                 }

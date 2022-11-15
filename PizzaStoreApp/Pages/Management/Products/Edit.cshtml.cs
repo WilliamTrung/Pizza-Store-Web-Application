@@ -6,66 +6,81 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ApplicationCore.Models2;
+using BusinessService.IService;
+using BusinessService.DTOs;
 
 namespace PizzaStoreApp.Pages.Management
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationCore.Models2.PizzaStoreContext _context;
+        private readonly ICategoryService _categoryService;
+        private readonly ISupplierService _supplierService;
+        private readonly IProductService _productService;
 
-        public EditModel(ApplicationCore.Models2.PizzaStoreContext context)
+
+        public EditModel(ISupplierService supplierService, ICategoryService categoryService, IProductService productService)
         {
-            _context = context;
+            _categoryService = categoryService;
+            _supplierService = supplierService;
+            _productService = productService;
         }
         [BindProperty]
-        public IFormFile FileUpload { get; set; } = default;
+        public IFormFile? FileUpload { get; set; } = default;
         [BindProperty]
         public Product Product { get; set; } = default!;
-
+        public string Message { get; set; } =  string.Empty;
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Products == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var product =  await _context.Products.FirstOrDefaultAsync(m => m.ProductId == id);
+            var product =  await _productService.GetDTOs(m => m.ProductId == id);
             if (product == null)
             {
                 return NotFound();
             }
-            Product = product;
-           ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
-           ViewData["SupplierId"] = new SelectList(_context.Suppliers, "SupplierId", "Address");
+            Product = product.First();
+           ViewData["CategoryId"] = new SelectList(await _categoryService.GetDTOs(), "CategoryId", "CategoryName");
+           ViewData["SupplierId"] = new SelectList(await _supplierService.GetDTOs(), "SupplierId", "CompanyName");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string image)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            _context.Attach(Product).State = EntityState.Modified;
-
+            
+            if (FileUpload != null && FileUpload.Length > 0)
+            {
+                var file_stored = "wwwroot" + "/" + "images" + "/" + FileUpload.FileName;
+                var file_save = "images" + "/" + FileUpload.FileName;
+                using (var filestream = new FileStream(file_stored, FileMode.Create))
+                {
+                    await FileUpload.CopyToAsync(filestream);
+                }
+                Product.ProductImage = file_save;
+            }
+            else
+            {
+                Product.ProductImage = image;
+            }
             try
             {
-                await _context.SaveChangesAsync();
+                var result = await _productService.Update(filter: p=>p.ProductId == Product.ProductId, Product);
+                if(result == null)
+                {
+                    Message = "Cannot update produc!";
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch
             {
-                if (!ProductExists(Product.ProductId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                Message = "Cannot update produc!";
             }
 
             return RedirectToPage("./Index");
@@ -73,7 +88,7 @@ namespace PizzaStoreApp.Pages.Management
 
         private bool ProductExists(int id)
         {
-          return _context.Products.Any(e => e.ProductId == id);
+            return false;
         }
     }
 }

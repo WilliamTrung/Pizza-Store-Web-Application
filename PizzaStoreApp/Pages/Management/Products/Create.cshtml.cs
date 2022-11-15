@@ -41,7 +41,7 @@ namespace PizzaStoreApp.Pages.Management
         [BindProperty]
         public Product Product { get; set; }
         [BindProperty]
-        public IFormFile? FileUpload { get; set; }
+        public IFormFile? FileUpload { get; set; } 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

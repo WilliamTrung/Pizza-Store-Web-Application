@@ -14,7 +14,7 @@ namespace ApplicationCore.Repository
         //R
         public Task<IEnumerable<TEntity>> Get(Expression<Func<TEntity,bool>>? filter = null, string? includeProperties = null);
         //U
-        public Task<TEntity> Update(TEntity entity);
+        public Task<TEntity> Update(Expression<Func<TEntity, bool>> filter, TEntity entity);
         //D
         public Task<bool> Delete(TEntity entity);
     }
