@@ -9,5 +9,6 @@ namespace BusinessService.IService
 {
     public interface IOrderService : IBaseService<Order, DTOs.Order>
     {
+        Task<DTOs.Order> CreateOrder(Cart cart);
     }
 }

@@ -45,7 +45,12 @@ namespace PizzaStoreApp.Pages.Customer
             } else
             {
                 //check out
-
+                var cart = SessionExtension.GetCart(HttpContext.Session);
+                if(cart != null && cart.Account != null && cart.Products != null && cart.Products.Count() > 0)
+                {
+                    var order = await _orderService.CreateOrder(cart);
+                    int i = 0;
+                }
             }
             return await OnGet();
         }

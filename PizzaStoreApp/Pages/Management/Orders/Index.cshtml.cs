@@ -4,28 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using ApplicationCore.Models2;
+using BusinessService.IService;
+using BusinessService.DTOs;
 
 namespace PizzaStoreApp.Pages.Management.Orders
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationCore.Models2.PizzaStoreContext _context;
+        private readonly IOrderService _orderService;
 
-        public IndexModel(ApplicationCore.Models2.PizzaStoreContext context)
+        public IndexModel(IOrderService orderService )
         {
-            _context = context;
+            _orderService = orderService;
         }
 
         public IList<Order> Order { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Orders != null)
+            Order = new List<Order>();
+            var orders = await _orderService.GetDTOs(includeProperties: "Account");
+            if(orders != null && orders.Count() > 0)
             {
-                Order = await _context.Orders
-                .Include(o => o.Account).ToListAsync();
+                Order = orders.ToList();
             }
         }
     }

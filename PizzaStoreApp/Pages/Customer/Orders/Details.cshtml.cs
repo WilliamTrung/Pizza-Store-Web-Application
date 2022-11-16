@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BusinessService.IService;
 using BusinessService.DTOs;
 
-namespace PizzaStoreApp.Pages.Management.Orders
+namespace PizzaStoreApp.Pages.Customer.Orders
 {
     public class DetailsModel : PageModel
     {
@@ -29,12 +29,12 @@ namespace PizzaStoreApp.Pages.Management.Orders
         {
             if (id == null)
             {
-                return RedirectToPage("/Management/Orders/Index");
+                return RedirectToPage("/Customer/Orders/Index");
             }
             var order = await _orderService.GetDTOs(filter: o => o.OrderId == id);
             if (order == null)
             {
-                return RedirectToPage("/Management/Orders/Index");
+                return RedirectToPage("/Customer/Orders/Index");
             }
             Order = order.First();
 

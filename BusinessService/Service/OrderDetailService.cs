@@ -16,6 +16,7 @@ namespace BusinessService.Service
         {
             _productService = new ProductService(context, mapper);
         }
+
         public override void DisableSelfReference(ref OrderDetail entity)
         {
             if(entity.Order != null)

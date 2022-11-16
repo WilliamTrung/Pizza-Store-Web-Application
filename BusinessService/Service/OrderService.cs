@@ -26,7 +26,7 @@ namespace BusinessService.Service
             DTOs.Order order = new DTOs.Order();
             order.OrderDate = DateTime.Now;
             order.ShipAddress = cart.Account.Address;
-            order.Account = cart.Account;
+            order.AccountId = cart.Account.AccountId;
             order.RequiredDate = DateTime.Now.AddDays(3);
             //order.Customer =
             var created_order_entity = await Create(order);
