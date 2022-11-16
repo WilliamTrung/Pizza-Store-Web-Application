@@ -1,0 +1,79 @@
+﻿@page
+@model PizzaStoreApp.Pages.Customer.CartModel
+@{
+}
+
+@using BusinessService.DTOs
+@using Microsoft.AspNetCore.Http
+@using PizzaStoreApp.Helper
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var message = Model.ErrorMessage;
+    if (message != null)
+    {
+        <h3>@Model.ErrorMessage</h3>
+    }
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].ProductImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.Products[0].Supplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cart.Products)
+        {
+        <tr>
+            <form method="post">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    <input type="number" name="quantity" min="1" value="@item.QuantityPerUnit"/>
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    <img src="~/@Url.Content(item.ProductImage)" alt="@Url.Content(item.ProductImage)"/>
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+                </td>
+                <td>
+                    <button name="remove" value="@item.ProductId">Remove</button>
+                        <button name="update" value="@item.ProductId">Update</button>
+                </td>
+            </form>
+            
+        </tr>
+}
+    </tbody>
+    <form method="post">
+        <button value="Check out">Check out</button>
+    </form>
+</table>
+
+
