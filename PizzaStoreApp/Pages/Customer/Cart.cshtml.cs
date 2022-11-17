@@ -49,8 +49,11 @@ namespace PizzaStoreApp.Pages.Customer
                 if(cart != null && cart.Account != null && cart.Products != null && cart.Products.Count() > 0)
                 {
                     var order = await _orderService.CreateOrder(cart);
-                    int i = 0;
+                    cart = new Cart();
+                    SessionExtension.Set<Cart>(HttpContext.Session, "cart", cart);
+                    return RedirectToPage("/Customer/Orders/Index");
                 }
+                ErrorMessage = "Cart is empty!";
             }
             return await OnGet();
         }
