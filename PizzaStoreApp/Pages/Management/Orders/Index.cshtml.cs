@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessService.IService;
 using BusinessService.DTOs;
+using PizzaStoreApp.Filter;
 
 namespace PizzaStoreApp.Pages.Management.Orders
 {
+    [Authorized("0")]
     public class IndexModel : PageModel
     {
         private readonly IOrderService _orderService;

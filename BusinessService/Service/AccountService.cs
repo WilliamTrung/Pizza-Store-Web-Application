@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessService.Service
 {
+    //BaseService<Category, DTOs.Category>, ICategoryService
     public class AccountService : BaseService<Account, DTOs.Account>, IAccountService
     {
         public AccountService(PizzaStoreContext context, IMapper mapper) : base(context, mapper)
@@ -44,6 +45,13 @@ namespace BusinessService.Service
                 }
             }
             return null;
+        }
+        public override Task<DTOs.Account> Create(DTOs.Account dto)
+        {
+            //check duplicate email
+            if (dto == null)
+                return null;
+            return base.Create(dto);
         }
     }
 }

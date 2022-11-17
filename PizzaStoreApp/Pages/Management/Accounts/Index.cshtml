@@ -1,0 +1,62 @@
+﻿@page
+@model PizzaStoreApp.Pages.Management.Accounts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account[0].Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Account) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @if(item.Type == 0){
+                    <p>Admin</p>
+                } else {
+                    <p>Customer</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.AccountId">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

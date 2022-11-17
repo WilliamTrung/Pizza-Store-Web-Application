@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessService.IService;
 using BusinessService.DTOs;
+using PizzaStoreApp.Filter;
 
 namespace PizzaStoreApp.Pages.Management
 {
+    [Authorized("0")]
     public class EditModel : PageModel
     {
         private readonly ICategoryService _categoryService;

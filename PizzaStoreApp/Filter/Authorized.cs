@@ -62,7 +62,8 @@ namespace PizzaStoreApp.Filter
             var flag = Authorizing(login, roles);
             if (flag)
                 return Task.CompletedTask;
-            return Task.FromException(new Exception(StatusCodes.Status401Unauthorized.ToString()));
+            context.HttpContext.Response.Redirect("/LoginEmployee");
+            return Task.CompletedTask;
         }
 
         public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)

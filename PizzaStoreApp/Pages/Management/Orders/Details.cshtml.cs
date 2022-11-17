@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessService.IService;
 using BusinessService.DTOs;
+using PizzaStoreApp.Filter;
 
 namespace PizzaStoreApp.Pages.Management.Orders
 {
+    [Authorized("0")]
     public class DetailsModel : PageModel
     {
         private readonly IOrderDetailService _orderDetailService;

@@ -1,4 +1,5 @@
-﻿using BusinessService.DTOs;
+﻿
+using ApplicationCore.Models2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessService.IService
 {
-    public interface IAccountService
+    public interface IAccountService : IBaseService<Account, DTOs.Account>
     {
-        public Task<Account?> Login(Account account);
-        public Task<Account?> Register(Account account);
+        public Task<DTOs.Account?> Login(DTOs.Account account);
+        public Task<DTOs.Account?> Register(DTOs.Account account);
     }
 }

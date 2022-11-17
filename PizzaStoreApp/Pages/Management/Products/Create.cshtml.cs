@@ -10,9 +10,11 @@ using BusinessService.DTOs;
 using BusinessService.Service;
 using System.IO;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using PizzaStoreApp.Filter;
 
 namespace PizzaStoreApp.Pages.Management
 {
+    [Authorized("0")]
     public class CreateModel : PageModel
     {
         private readonly IProductService _productService;

@@ -12,7 +12,7 @@ using PizzaStoreApp.Filter;
 
 namespace PizzaStoreApp.Pages.Management.Products
 {
-    [Authorized]
+    [Authorized("0")]
     public class IndexModel : PageModel
     {
         private readonly IProductService _productService;
