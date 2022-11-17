@@ -16,9 +16,16 @@ namespace PizzaStoreApp.Pages.Customer
         public string ErrorMessage = "";
         [BindProperty]
         public Cart Cart { get; set; }
+        public decimal Total { get; set; } = 0;
         public async Task<IActionResult> OnGet()
         {
             Cart = SessionExtension.GetCart(HttpContext.Session);
+            foreach (var product in Cart.Products)
+            {
+                Total += (product.QuantityPerUnit * product.UnitPrice);
+                product.UnitPrice = Math.Round(product.UnitPrice, 0);
+            }
+            Total = Math.Round(Total, 0);
             return Page();
 
         }
