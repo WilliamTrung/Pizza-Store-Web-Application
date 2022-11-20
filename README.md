@@ -23,13 +23,10 @@ An Application with 2 roles: User and Administrator
     - View/Create/Update Products
     ![image](https://user-images.githubusercontent.com/52268132/202891286-6f7f2204-40ab-40a4-aacc-9f2430bd1d94.png)
     ![image](https://user-images.githubusercontent.com/52268132/202891291-2a8a80c2-c6e6-4b71-a1b7-02bd950d5741.png)
-    
     - View/Create/Update Accounts
     ![image](https://user-images.githubusercontent.com/52268132/202891389-8001bc6f-e081-4846-8730-22be92b7dc33.png)
     ![image](https://user-images.githubusercontent.com/52268132/202891403-2de203c1-e265-420d-b047-68a95ffa8113.png)
     ![image](https://user-images.githubusercontent.com/52268132/202891425-a682d749-d93b-45ab-afd1-056a3be74e62.png)
-
-    <img src="https://user-images.githubusercontent.com/52268132/202891389-8001bc6f-e081-4846-8730-22be92b7dc33.png"/>
     - View Users' Orders and Details of selected Order
     ![image](https://user-images.githubusercontent.com/52268132/202891460-bb7137fe-75ea-4694-92e1-8ad18d45ecd6.png)
     ![image](https://user-images.githubusercontent.com/52268132/202891465-3c8ff06a-87e6-4e5d-aa2c-672d1cb40a3b.png)
