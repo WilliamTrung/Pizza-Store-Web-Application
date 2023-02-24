@@ -15,7 +15,7 @@ namespace ApplicationCore.Models2
         [Required]
         public string Username { get; set; } = null!;
         [Required]
-        public int Type { get; set; }
+        public int Role { get; set; }
 
         [Required]
         public string Password { get; set; } = null!;

@@ -17,7 +17,7 @@ namespace ApplicationCore.Models2
         public DateTime? ShippedDate { get; set; }
         public string? Freight { get; set; }
         public string ShipAddress { get; set; } = null!;
-
+        public decimal TotalPrice { get; set; }
         public virtual Account Account { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
